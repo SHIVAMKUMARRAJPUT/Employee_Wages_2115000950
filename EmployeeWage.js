@@ -40,4 +40,24 @@ empHours = getWorkingHours(empCheck);
 empWage = calculateDailyWage(empHours);
 console.log(`Employee Hours: ${empHours} | Employee Wage: Rs${empWage}`);
 
+// UC4 - Calculate Wages for a Month Using While Loop
+
+const MAX_WORKING_DAYS = 20;
+const MAX_WORKING_HOURS = 100;
+
+let totalEmpHours = 0;
+let totalWorkingDays = 0;
+let totalEmpWage = 0;
+
+while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 3);
+    let empHours = getWorkingHours(empCheck);
+    totalEmpHours += empHours;
+    let empWage = calculateDailyWage(empHours);
+    totalEmpWage += empWage;
+    console.log(`Day ${totalWorkingDays}, Hours: ${empHours}, Daily Wage: Rs${empWage}`);
+}
+
+console.log(`Total Working Days: ${totalWorkingDays}, Total Hours: ${totalEmpHours}, Total Wage: Rs${totalEmpWage}`);
 
