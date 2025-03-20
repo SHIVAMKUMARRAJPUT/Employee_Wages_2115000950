@@ -173,3 +173,50 @@ dayWiseWageMap.forEach((wage, day) => {
 let totalWageUsingMap = Array.from(dayWiseWageMap.values()).reduce((total, wage) => total + wage, 0);
 console.log(`Total Wage Computed Using Map: Rs${totalWageUsingMap}`);
 
+// UC9 - Use Daily Wage Map and Daily Hour Map for Operations Using Arrow Functions
+
+let dayWiseHoursMap = new Map();
+dayWiseWageMap = new Map();
+
+// Function to Calculate and Store Day Wise Hours and Wage
+function storeDayWiseData(day, empHours) {
+    let empWage = calculateDailyWage(empHours);
+    dayWiseHoursMap.set(day, empHours);
+    dayWiseWageMap.set(day, empWage);
+}
+
+// Variables Initialize Karna
+totalEmpHours = 0;
+totalWorkingDays = 0;
+
+while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 3);
+    let empHours = getWorkingHours(empCheck);
+    totalEmpHours += empHours;
+    storeDayWiseData(totalWorkingDays, empHours);
+}
+
+// a. Calculate Total Wage and Total Hours Worked Using Arrow Function
+let totalWageUsingArrow = () => Array.from(dayWiseWageMap.values()).reduce((total, wage) => total + wage, 0);
+let totalHoursUsingArrow = () => Array.from(dayWiseHoursMap.values()).reduce((total, hours) => total + hours, 0);
+
+console.log(`Total Wage using Arrow Function: Rs${totalWageUsingArrow()}`);
+console.log(`Total Hours using Arrow Function: ${totalHoursUsingArrow()} Hours`);
+
+// b. Show Full Working Days, Part Working Days, and No Working Days Using Arrow Functions
+let fullWorkingDays = Array.from(dayWiseHoursMap.entries())
+    .filter(([day, hours]) => hours === FULL_TIME_HOURS)
+    .map(([day]) => `Day ${day}`);
+
+let partWorkingDays = Array.from(dayWiseHoursMap.entries())
+    .filter(([day, hours]) => hours === PART_TIME_HOURS)
+    .map(([day]) => `Day ${day}`);
+
+let noWorkingDays = Array.from(dayWiseHoursMap.entries())
+    .filter(([day, hours]) => hours === 0)
+    .map(([day]) => `Day ${day}`);
+
+console.log("Full Working Days: ", fullWorkingDays);
+console.log("Part Working Days: ", partWorkingDays);
+console.log("No Working Days: ", noWorkingDays);
