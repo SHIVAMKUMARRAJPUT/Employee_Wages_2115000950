@@ -28,3 +28,16 @@ function getWorkingHours(empCheck) {
 let empHours = getWorkingHours(empCheck);
 let empWage = empHours * WAGE_PER_HOUR;
 console.log(`Employee Hours: ${empHours} | Employee Wage: Rs. ${empWage}`);
+
+// UC3 - Refactor to Use Function for Daily Wage Calculation
+
+function calculateDailyWage(empHours) {
+    return empHours * WAGE_PER_HOUR;
+}
+
+empCheck = Math.floor(Math.random() * 3);
+empHours = getWorkingHours(empCheck);
+empWage = calculateDailyWage(empHours);
+console.log(`Employee Hours: ${empHours} | Employee Wage: Rs${empWage}`);
+
+
