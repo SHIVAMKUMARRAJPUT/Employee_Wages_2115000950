@@ -78,3 +78,31 @@ while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS)
 }
 
 console.log(`Total Working Days: ${totalWorkingDays}, Total Hours: ${totalEmpHours}, Total Wage: Rs${totalEmpWage}`);
+
+
+// UC6 - Store Daily Wage Along with Total Wage Using Array
+
+let dailyWagesArray = [];
+
+function storeDailyWage(empHours) {
+    let empWage = calculateDailyWage(empHours);
+    dailyWagesArray.push(empWage);
+    return empWage;
+}
+
+totalEmpHours = 0;
+totalWorkingDays = 0;
+totalEmpWage = 0;
+dailyWagesArray = [];
+
+while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 3);
+    let empHours = getWorkingHours(empCheck);
+    totalEmpHours += empHours;
+    totalEmpWage += storeDailyWage(empHours);
+    console.log(`Day ${totalWorkingDays}, Hours: ${empHours}, Daily Wage: Rs${dailyWagesArray[totalWorkingDays - 1]}`);
+}
+
+console.log("Daily Wages: ", dailyWagesArray);
+console.log(`Total Working Days: ${totalWorkingDays}, Total Hours: ${totalEmpHours}, Total Wage: Rs${totalEmpWage}`);
