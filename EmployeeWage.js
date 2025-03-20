@@ -106,3 +106,37 @@ while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS)
 
 console.log("Daily Wages: ", dailyWagesArray);
 console.log(`Total Working Days: ${totalWorkingDays}, Total Hours: ${totalEmpHours}, Total Wage: Rs${totalEmpWage}`);
+
+
+// UC7 - Perform Array Operations Using Array Helper Functions
+
+// a. Calculate Total Wage using Reduce
+let totalWageUsingReduce = dailyWagesArray.reduce((total, wage) => total + wage, 0);
+console.log(`Total Wage using Reduce: Rs${totalWageUsingReduce}`);
+
+// b. Show the Day along with Daily Wage using Map
+let dailyWageWithDayArray = dailyWagesArray.map((wage, index) => `Day ${index + 1} - Rs${wage}`);
+console.log("Daily Wage with Day: ", dailyWageWithDayArray);
+
+// c. Show Days when Full Time Wage of Rs160 was Earned using Filter
+let fullTimeWageDays = dailyWagesArray
+    .map((wage, index) => ({ day: index + 1, wage }))
+    .filter(dayObj => dayObj.wage === FULL_TIME_HOURS * WAGE_PER_HOUR)
+    .map(dayObj => `Day ${dayObj.day}`);
+console.log("Full Time Wage Days: ", fullTimeWageDays);
+
+// d. Find the First Occurrence when Full Time Wage was Earned using Find
+let firstFullTimeDay = dailyWagesArray.find(wage => wage === FULL_TIME_HOURS * WAGE_PER_HOUR);
+console.log(`First Full Time Wage Earned: Rs${firstFullTimeDay}`);
+
+// e. Check if Every Element of Full Time Wage is Truly Holding Full Time Wage using Every
+let isAllFullTime = dailyWagesArray.every(wage => wage === FULL_TIME_HOURS * WAGE_PER_HOUR);
+console.log(`Is Every Wage a Full Time Wage? ${isAllFullTime}`);
+
+// f. Check if there is Any Part Time Wage using Some
+let hasPartTimeWage = dailyWagesArray.some(wage => wage === PART_TIME_HOURS * WAGE_PER_HOUR);
+console.log(`Is there Any Part Time Wage? ${hasPartTimeWage}`);
+
+// g. Find the Number of Days the Employee Worked
+let workingDaysCount = dailyWagesArray.reduce((count, wage) => (wage > 0 ? count + 1 : count), 0);
+console.log(`Total Number of Working Days: ${workingDaysCount}`);
