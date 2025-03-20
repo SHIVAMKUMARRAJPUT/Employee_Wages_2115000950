@@ -220,3 +220,35 @@ let noWorkingDays = Array.from(dayWiseHoursMap.entries())
 console.log("Full Working Days: ", fullWorkingDays);
 console.log("Part Working Days: ", partWorkingDays);
 console.log("No Working Days: ", noWorkingDays);
+
+
+// UC10 - Store Day, Hours Worked, and Wage Earned in a Single Object
+
+let dayWiseEmpDataArray = [];
+
+// Function to Calculate and Store Day Wise Data in Object
+function storeDayWiseDataInObject(day, empHours) {
+    let empWage = calculateDailyWage(empHours);
+    const empData = {
+        day: day,
+        hoursWorked: empHours,
+        wageEarned: empWage
+    };
+    dayWiseEmpDataArray.push(empData);
+}
+
+// Variables Initialize Karna
+totalEmpHours = 0;
+totalWorkingDays = 0;
+
+while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 3);
+    let empHours = getWorkingHours(empCheck);
+    totalEmpHours += empHours;
+    storeDayWiseDataInObject(totalWorkingDays, empHours);
+}
+
+// Display Day Wise Data from Object
+console.log("Day Wise Employee Data:");
+console.log(dayWiseEmpDataArray);
