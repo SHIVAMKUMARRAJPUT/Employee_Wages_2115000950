@@ -252,3 +252,34 @@ while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS)
 // Display Day Wise Data from Object
 console.log("Day Wise Employee Data:");
 console.log(dayWiseEmpDataArray);
+
+// UC11 - Perform Object Operations Using Arrow Functions
+
+// a. Calculate Total Wage and Total Hours Worked Using Arrow Functions
+totalWageUsingArrow = () => dayWiseEmpDataArray.reduce((total, data) => total + data.wageEarned, 0);
+totalHoursUsingArrow = () => dayWiseEmpDataArray.reduce((total, data) => total + data.hoursWorked, 0);
+
+console.log(`Total Wage using Arrow Function: Rs${totalWageUsingArrow()}`);
+console.log(`Total Hours using Arrow Function: ${totalHoursUsingArrow()} Hours`);
+
+// b. Show Full Working Days Using forEach
+console.log("Full Working Days:");
+dayWiseEmpDataArray.forEach(data => {
+    if (data.hoursWorked === FULL_TIME_HOURS) {
+        console.log(`Day ${data.day}`);
+    }
+});
+
+// c. Show Part Working Days Using Map by Reducing to String Array
+partWorkingDays = dayWiseEmpDataArray
+    .filter(data => data.hoursWorked === PART_TIME_HOURS)
+    .map(data => `Day ${data.day}`);
+
+console.log("Part Working Days:", partWorkingDays);
+
+// d. Show No Working Days Only Using Map Function
+noWorkingDays = dayWiseEmpDataArray
+    .filter(data => data.hoursWorked === 0)
+    .map(data => `Day ${data.day}`);
+
+console.log("No Working Days:", noWorkingDays);
