@@ -140,3 +140,36 @@ console.log(`Is there Any Part Time Wage? ${hasPartTimeWage}`);
 // g. Find the Number of Days the Employee Worked
 let workingDaysCount = dailyWagesArray.reduce((count, wage) => (wage > 0 ? count + 1 : count), 0);
 console.log(`Total Number of Working Days: ${workingDaysCount}`);
+
+// UC8 - Store Day and Daily Wage Along with Total Wage Using Map
+
+let dayWiseWageMap = new Map();
+
+// Function to Calculate and Store Day Wise Wage
+function storeDayWiseWage(day, empHours) {
+    let empWage = calculateDailyWage(empHours);
+    dayWiseWageMap.set(day, empWage);
+}
+
+// Variables Initialize Karna
+totalEmpHours = 0;
+totalWorkingDays = 0;
+
+while (totalEmpHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 3);
+    let empHours = getWorkingHours(empCheck);
+    totalEmpHours += empHours;
+    storeDayWiseWage(totalWorkingDays, empHours);
+}
+
+// a. Display Day Wise Wage
+console.log("Day Wise Wage:");
+dayWiseWageMap.forEach((wage, day) => {
+    console.log(`Day ${day}: Wage = Rs${wage}`);
+});
+
+// b. Compute Total Wage Using Map
+let totalWageUsingMap = Array.from(dayWiseWageMap.values()).reduce((total, wage) => total + wage, 0);
+console.log(`Total Wage Computed Using Map: Rs${totalWageUsingMap}`);
+
